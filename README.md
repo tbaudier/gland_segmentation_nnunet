@@ -15,7 +15,5 @@ Create a DeepLearning model in order to segment salivary and lacrimal glands.
 - Python
 - PyTorch
 - nnUnet
+  
 [comment]: <> (insert the rest of the list here + mention the use of jean zay)
-
-
-
