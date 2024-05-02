@@ -12,7 +12,7 @@ f.close()
 for patient in patients.keys():
     print(patient)
     # open the ct
-    dcmFiles = glob.glob("originalData/" + patient + "/*/*.dcm")
+    dcmFiles = glob.glob("../data/originalData/" + patient + "/*/*.dcm")
     image = gt.read_dicom(dcmFiles)
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()
@@ -34,14 +34,14 @@ for patient in patients.keys():
 
     neworigin = itk.Vector[itk.D, 3]()
     for i in range(0, 3):
-        neworigin[i] = -newsize[i]/2.0 + 0.5*newsize[i]
+        neworigin[i] = -newspacing[i]*newsize[i]/2.0 + 0.5*newsize[i]
 
     #create the empty image to add stuctures
     array = np.zeros([newsize[2], newsize[1], newsize[0]], dtype=np.int32) # inverted Z and x
     index = 1
 
     #get structures
-    structFile = glob.glob("segmentations/" + patient + "/*__Studies/*/*.dcm")
+    structFile = glob.glob("../data/segmentations/" + patient + "/*__Studies/*/*.dcm")
     structset = pydicom.read_file(structFile[0])
     for r in ['Glande_Lacrim_D', 'Glande_Lacrim_G', 'Glnd_Submand_L', 'Parotid_R', 'Glnd_Submand_R', 'Parotid_L']:
         aroi = gt.region_of_interest(structset, r)
@@ -54,12 +54,12 @@ for patient in patients.keys():
     structImage = itk.image_from_array(array)
     structImage.SetSpacing(newspacing)
     structImage.SetOrigin(neworigin)
-    itk.imwrite(structImage, "Dataset001_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(structImage, "../data/Dataset001_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
         
     # Center the CT
     image.SetOrigin(centerorigin)
     # resize and save
     output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(output, "Dataset001_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(output, "../data/Dataset001_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
 
 
