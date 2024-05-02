@@ -33,12 +33,11 @@ for patient in patients.keys():
     newsize[2] = 2050
 
     neworigin = itk.Vector[itk.D, 3]()
-    neworigin[0] = -299.5
-    neworigin[1] = -299.5
-    neworigin[2] = -1024.5
+    for i in range(0, 3):
+        neworigin[i] = -newsize[i]/2.0 + 0.5*newsize[i]
 
     #create the empty image to add stuctures
-    array = np.zeros([2050, 600, 600], dtype=np.int32) # inverted Z and x
+    array = np.zeros([newsize[2], newsize[1], newsize[0]], dtype=np.int32) # inverted Z and x
     index = 1
 
     #get structures
