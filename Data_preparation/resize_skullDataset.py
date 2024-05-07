@@ -38,7 +38,7 @@ for patient in patients.keys():
     # Center the skull
     skull.SetOrigin(centerorigin)
     # resize and save
-    output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=neworigin, newsize = size, pad=0, interpolation_mode="NN", force_resample=True)
+    output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=neworigin, newsize = size, pad=0, force_resample=True)
     itk.imwrite(output, "Datasettest_glands/skull/" + patients[patient] + "_0000.nii.gz", compression=True)
 
 
