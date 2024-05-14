@@ -35,10 +35,10 @@ for patient in patients.keys():
     image.SetOrigin(centerorigin)
     # resize and save
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(image_output, "test/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(image_output, "/home/bcatez/data/Dataset004_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
 
     # Center the label
     label.SetOrigin(centerorigin)
     # resize and save
     label_output = gt.applyTransformation(input=label,newspacing=newspacing,neworigin=centerorigin, newsize=newsize,pad=0 ,interpolation_mode="NN",force_resample=True)
-    itk.imwrite(label_output, "test/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(label_output, "/home/bcatez/data/Dataset004_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
