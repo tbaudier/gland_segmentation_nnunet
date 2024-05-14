@@ -18,7 +18,7 @@ for patient in patients.keys():
     size = image.GetLargestPossibleRegion().GetSize()
 
     # open skulls
-    skull = itk.imread(f"Datasettest_glands/skull/" + patients[patient] + "_0000.nii.gz")
+    skull = itk.imread(f"DatasetSkull_glands/skull/" + patients[patient] + "_0000.nii.gz")
     # Origin to center the ct
     centerorigin = itk.Vector[itk.D, 3]()
     for i in range(0, 3):
