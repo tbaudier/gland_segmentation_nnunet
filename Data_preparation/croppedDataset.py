@@ -2,6 +2,7 @@ import gatetools as gt
 import json
 import itk
 from Data_preparation import definecrop
+from Data_preparation import center_skull
 
 f = open('patient.json')
 patients = json.load(f)
@@ -9,15 +10,14 @@ f.close()
 
 path = "/home/bcatez/data/Dataset002_glands/skull/"
 
-mni , mxi = definecrop.find_crop_limits(skull_path=path, patients=patients)
-z = mxi - mni
+z = definecrop.find_crop_height(skull_path=path, patients=patients)
 
-print("Minimum layer : ", mni)
-print("Maximum layer : ", mxi)
 print("Height of the cropped image : ",z)
 
 for patient in patients.keys():
     print(patient)
+
+    mni , mxi = definecrop.find_skull_limits(skull_path=path, patient=patient, z=z)
 
     # open skulls
     skull = itk.imread(f"/home/bcatez/data/Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz")
