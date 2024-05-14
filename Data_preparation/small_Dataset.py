@@ -9,8 +9,8 @@ f.close()
 for patient in patients.keys():
     print(patient)
     # open the ct
-    image = itk.imread(f"/home/bcatez/data/Dataset003_glands/imagesTr/" + patients[patient] + "_0000.nii.gz")
-    label = itk.imread(f"/home/bcatez/data/Dataset003_glands/labelsTr/" + patients[patient] + "_0000.nii.gz")
+    image = itk.imread(f"/home/bcatez/data/Dataset003_1_glands/imagesTr/" + patients[patient] + "_0000.nii.gz")
+    label = itk.imread(f"/home/bcatez/data/Dataset003_1_glands/labelsTr/" + patients[patient] + "_0000.nii.gz")
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()
 
@@ -27,7 +27,7 @@ for patient in patients.keys():
     newsize = itk.Size[3]()
     newsize[0] = 64
     newsize[1] = 64
-    newsize[2] = 64
+    newsize[2] = 90
 
   
     # Center the image

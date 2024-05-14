@@ -1,19 +1,26 @@
 import gatetools as gt
 import json
 import itk
-import numpy as np
+from Data_preparation import definecrop
 
 f = open('patient.json')
 patients = json.load(f)
 f.close()
+
+path = "/home/bcatez/data/Dataset002_glands/skull/"
+
+mni , mxi = definecrop.find_crop_limits(skull_path=path, patients=patients)
+z = mxi - mni
+
+print("Minimum layer : ", mni)
+print("Maximum layer : ", mxi)
+print("Height of the cropped image : ",z)
 
 for patient in patients.keys():
     print(patient)
 
     # open skulls
     skull = itk.imread(f"/home/bcatez/data/Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz")
-    crop_skull = itk.GetArrayViewFromImage(skull)
-    mni, mxi = np.where(crop_skull)[0][0] - 50 , np.where(crop_skull)[0][-1] + 50
     skull = itk.GetImageViewFromArray(skull[mni:mxi,:,:])
 
     # open the ct
@@ -40,23 +47,26 @@ for patient in patients.keys():
     newsize = itk.Size[3]()
     newsize[0] = 200 # 600 when spacing = 1mm
     newsize[1] = 200 # 600 when spacing = 1mm
-    newsize[2] = 125 # 375 when spacing = 1mm
+    newsize[2] = round(z/newspacing[0]) # z when spacing = 1mm
 
 
     # center the label
     label.SetOrigin(centerorigin)
     # resize and save the label
     label_output = gt.applyTransformation(input = label, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=0, interpolation_mode="NN", force_resample=True)
-    itk.imwrite(label_output, "Dataset003_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(label_output, "Dataset003_1_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("label saved")
         
     # Center the CT
     image.SetOrigin(centerorigin)
     # resize and save the CT
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(image_output, "Dataset003_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(image_output, "Dataset003_1_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("CT saved")
 
     # Center the skull
     skull.SetOrigin(centerorigin)
     # resize and save the skull
     skull_output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=0, force_resample=True)
-    itk.imwrite(skull_output, "Dataset003_glands/skulls/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(skull_output, "Dataset003_1_glands/skulls/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("Skull saved")
