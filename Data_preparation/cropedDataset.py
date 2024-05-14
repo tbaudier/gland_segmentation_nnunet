@@ -25,6 +25,7 @@ for patient in patients.keys():
     # open the label
     label = itk.imread("/home/bcatez/data/Dataset002_glands/labelsTr/" + patients[patient] + "_0000.nii.gz")
     label = itk.GetImageViewFromArray(label[mni:mxi,:,:])
+    label = label.astype(itk.SS)
 
     # Origin to center the ct
     centerorigin = itk.Vector[itk.D, 3]()
