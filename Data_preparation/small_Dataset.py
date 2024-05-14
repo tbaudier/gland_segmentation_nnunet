@@ -2,7 +2,7 @@ import gatetools as gt
 import json
 import itk
 
-f = open('patient.json')
+f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
@@ -25,9 +25,9 @@ for patient in patients.keys():
         newspacing[i] = 9.0
 
     newsize = itk.Size[3]()
-    newsize[0] = 64
-    newsize[1] = 64
-    newsize[2] = 90
+    newsize[0] = 67
+    newsize[1] = 67
+    newsize[2] = 42
 
   
     # Center the image
