@@ -11,7 +11,6 @@ for patient in patients.keys():
     # open the ct
     image = itk.imread(f"/home/bcatez/data/Dataset003_glands/imagesTr/" + patients[patient] + "_0000.nii.gz")
     label = itk.imread(f"/home/bcatez/data/Dataset003_glands/labelsTr/" + patients[patient] + "_0000.nii.gz")
-    label = label.astype(itk.SS)
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()
 
