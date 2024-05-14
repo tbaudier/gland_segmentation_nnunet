@@ -51,11 +51,13 @@ def find_skull_limits(skull_path = str, patient = str, z = int):
     center = ((mxi-mni)/2) + mni
     # Find distance between skull center and image upper limit
     distance = (skull.shape[0])-center
+    # Find max distance
+    max_distance = round(z/2)
 
     # If distance is greater than the max distance
-    if distance > round(z/2):
-          # Define limits as they are
-          return mni, mxi
+    if distance > max_distance:
+          # Define limits from center
+          return center - max_distance, center + max_distance
     else:
-          # Define limits from max distance
+          # Define limits from image top
           return skull.shape[0] - z , skull.shape[0]
