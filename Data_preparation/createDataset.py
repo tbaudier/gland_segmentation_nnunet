@@ -5,20 +5,20 @@ import itk
 import numpy as np
 import pydicom
 
-f = open('patient.json')
+f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
 for patient in patients.keys():
     print(patient, "\n")
     # open the ct
-    dcmFiles = glob.glob("originalData/" + patient + "/*/*.dcm")
+    dcmFiles = glob.glob("/home/bcatez/data/originalData/" + patient + "/*/*.dcm")
     image = gt.read_dicom(dcmFiles)
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()
 
     # open skulls
-    skull = itk.imread(f"DatasetSkull_glands/skull/" + patients[patient] + "_0000.nii.gz")
+    skull = itk.imread(f"/home/bcatez/data/DatasetSkull_glands/skull/" + patients[patient] + "_0000.nii.gz")
     # Origin to center the ct
     centerorigin = itk.Vector[itk.D, 3]()
     for i in range(0, 3):
@@ -45,7 +45,7 @@ for patient in patients.keys():
 
     print("Label...")
     #get structures
-    structFile = glob.glob("segmentations/" + patient + "/*__Studies/*/*.dcm")
+    structFile = glob.glob("/home/bcatez/data/segmentations/" + patient + "/*__Studies/*/*.dcm")
     structset = pydicom.read_file(structFile[0])
     for r in ['Glande_Lacrim_D', 'Glande_Lacrim_G', 'Glnd_Submand_L', 'Parotid_R', 'Glnd_Submand_R', 'Parotid_L']:
         aroi = gt.region_of_interest(structset, r)
@@ -58,7 +58,7 @@ for patient in patients.keys():
     structImage = itk.image_from_array(array)
     structImage.SetSpacing(newspacing)
     structImage.SetOrigin(neworigin)
-    itk.imwrite(structImage, "Dataset002_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(structImage, "/home/bcatez/data/Dataset002_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("CT...")  
@@ -66,7 +66,7 @@ for patient in patients.keys():
     image.SetOrigin(centerorigin)
     # resize and save the CT
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(image_output, "Dataset002_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(image_output, "/home/bcatez/data/Dataset002_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("Skull...")
@@ -74,6 +74,6 @@ for patient in patients.keys():
     skull.SetOrigin(centerorigin)
     # resize and save the skull
     skull_output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=0, force_resample=True)
-    itk.imwrite(skull_output, "Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(skull_output, "/home/bcatez/data/Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n______________________________________")
     print("\n")

@@ -3,14 +3,14 @@ import gatetools as gt
 import json
 import itk
 
-f = open('patient.json')
+f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
 for patient in patients.keys():
     print(patient)
     # open the ct
-    dcmFiles = glob.glob("originalData/" + patient + "/*/*.dcm")
+    dcmFiles = glob.glob("/home/bcatez/data/originalData/" + patient + "/*/*.dcm")
     image = gt.read_dicom(dcmFiles)
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()

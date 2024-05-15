@@ -55,7 +55,7 @@ for patient in patients.keys():
     label.SetOrigin(centerorigin)
     # resize and save the label
     label_output = gt.applyTransformation(input = label, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=0, interpolation_mode="NN", force_resample=True)
-    itk.imwrite(label_output, "/home/bcatez/data/Dataset003_1_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(label_output, "/home/bcatez/data/Dataset003_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("CT...")  
@@ -63,7 +63,7 @@ for patient in patients.keys():
     image.SetOrigin(centerorigin)
     # resize and save the CT
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(image_output, "/home/bcatez/data/Dataset003_1_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(image_output, "/home/bcatez/data/Dataset003_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("Skull...")
@@ -71,6 +71,6 @@ for patient in patients.keys():
     skull.SetOrigin(centerorigin)
     # resize and save the skull
     skull_output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=0, force_resample=True)
-    itk.imwrite(skull_output, "/home/bcatez/data/Dataset003_1_glands/skulls/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(skull_output, "/home/bcatez/data/Dataset003_glands/skulls/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n______________________________________")
     print("\n")
