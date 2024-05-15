@@ -10,7 +10,7 @@ patients = json.load(f)
 f.close()
 
 for patient in patients.keys():
-    print(patient)
+    print(patient, "\n")
     # open the ct
     dcmFiles = glob.glob("originalData/" + patient + "/*/*.dcm")
     image = gt.read_dicom(dcmFiles)
@@ -43,6 +43,7 @@ for patient in patients.keys():
     array = np.zeros([newsize[2], newsize[1], newsize[0]], dtype=np.int32) # inverted Z and x
     index = 1
 
+    print("Label...")
     #get structures
     structFile = glob.glob("segmentations/" + patient + "/*__Studies/*/*.dcm")
     structset = pydicom.read_file(structFile[0])
@@ -58,15 +59,21 @@ for patient in patients.keys():
     structImage.SetSpacing(newspacing)
     structImage.SetOrigin(neworigin)
     itk.imwrite(structImage, "Dataset002_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
-        
+    print("Saved\n")
+
+    print("CT...")  
     # Center the CT
     image.SetOrigin(centerorigin)
     # resize and save the CT
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=-1024, force_resample=True)
     itk.imwrite(image_output, "Dataset002_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("Saved\n")
 
+    print("Skull...")
     # Center the skull
     skull.SetOrigin(centerorigin)
     # resize and save the skull
     skull_output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=0, force_resample=True)
     itk.imwrite(skull_output, "Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("Saved\n______________________________________")
+    print("\n")

@@ -7,7 +7,7 @@ patients = json.load(f)
 f.close()
 
 for patient in patients.keys():
-    print(patient)
+    print(patient,"\n")
     # open the ct
     image = itk.imread(f"/home/bcatez/data/Dataset003_1_glands/imagesTr/" + patients[patient] + "_0000.nii.gz")
     label = itk.imread(f"/home/bcatez/data/Dataset003_1_glands/labelsTr/" + patients[patient] + "_0000.nii.gz")
@@ -29,15 +29,18 @@ for patient in patients.keys():
     newsize[1] = 67
     newsize[2] = 42
 
-  
+    print("CT...")
     # Center the image
     image.SetOrigin(centerorigin)
     # resize and save
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=centerorigin, newsize = newsize, pad=-1024, force_resample=True)
     itk.imwrite(image_output, "/home/bcatez/data/Dataset004_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("Saved\n")
 
+    print("Label...")
     # Center the label
     label.SetOrigin(centerorigin)
     # resize and save
     label_output = gt.applyTransformation(input=label,newspacing=newspacing,neworigin=centerorigin, newsize=newsize,pad=0 ,interpolation_mode="NN",force_resample=True)
     itk.imwrite(label_output, "/home/bcatez/data/Dataset004_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    print("Saved\n______________________________________")
