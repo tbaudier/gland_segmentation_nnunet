@@ -4,10 +4,14 @@ import json
 import itk
 import numpy as np
 import pydicom
+from nnunetv2.dataset_conversion import generate_dataset_json
 
 f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
+
+folder_path = "/home/bcatez/data/nnUnet_raw/Dataset002_glands"
+skull_path = "/home/bcatez/data/Skull_folder"
 
 for patient in patients.keys():
     print(patient, "\n")
@@ -18,7 +22,7 @@ for patient in patients.keys():
     size = image.GetLargestPossibleRegion().GetSize()
 
     # open skulls
-    skull = itk.imread(f"/home/bcatez/data/DatasetSkull_glands/skull/" + patients[patient] + "_0000.nii.gz")
+    skull = itk.imread(skull_path + "/skull_resized/" + patients[patient] + "_0000.nii.gz")
     # Origin to center the ct
     centerorigin = itk.Vector[itk.D, 3]()
     for i in range(0, 3):
@@ -58,7 +62,7 @@ for patient in patients.keys():
     structImage = itk.image_from_array(array)
     structImage.SetSpacing(newspacing)
     structImage.SetOrigin(neworigin)
-    itk.imwrite(structImage, "/home/bcatez/data/Dataset002_glands/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(structImage, folder_path + "/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("CT...")  
@@ -66,7 +70,7 @@ for patient in patients.keys():
     image.SetOrigin(centerorigin)
     # resize and save the CT
     image_output = gt.applyTransformation(input = image, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=-1024, force_resample=True)
-    itk.imwrite(image_output, "/home/bcatez/data/Dataset002_glands/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(image_output, folder_path + "/imagesTr/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n")
 
     print("Skull...")
@@ -74,6 +78,20 @@ for patient in patients.keys():
     skull.SetOrigin(centerorigin)
     # resize and save the skull
     skull_output = gt.applyTransformation(input = skull, newspacing = newspacing, neworigin=neworigin, newsize = newsize, pad=0, force_resample=True)
-    itk.imwrite(skull_output, "/home/bcatez/data/Dataset002_glands/skull/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(skull_output, skull_path + "/skull_fullsized/" + patients[patient] + "_0000.nii.gz", compression=True)
     print("Saved\n______________________________________")
     print("\n")
+
+
+generate_dataset_json.generate_dataset_json(output_folder=folder_path,
+                                            channel_names={0:"CT"}, 
+                                            labels={"background" : 0,
+                                                    "Glande_Lacrim_D":1,
+                                                    "Glande_Lacrim_G":2,
+                                                    "Glnd_Submand_L":3,
+                                                    "Parotid_R":4,
+                                                    "Glnd_Submand_R":5,
+                                                    "Parotid_L":6},
+                                            num_training_cases=50,
+                                            file_ending=".nii.gz")
+print("Dataset.json generated succesfully.")
