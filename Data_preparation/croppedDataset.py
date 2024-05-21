@@ -8,8 +8,8 @@ f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
-origin_path = "/home/bcatez/data/nnUnet_raw/Dataset002_glands"
-folder_path = "/home/bcatez/data/nnUnet_raw/Dataset003_glands"
+origin_path = "/home/bcatez/data/nnUNet_raw/Dataset002_glands"
+folder_path = "/home/bcatez/data/nnUNet_raw/Dataset003_glands"
 skull_path = "/home/bcatez/data/Skull_folder"
 
 z = definecrop.find_crop_height(skull_path=skull_path + "/skull_fullsized/", patients=patients)

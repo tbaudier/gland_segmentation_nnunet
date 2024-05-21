@@ -7,8 +7,8 @@ f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
-origin_path = "/home/bcatez/data/nnUnet_raw/Dataset003_glands"
-folder_path = "/home/bcatez/data/nnUnet_raw/Dataset004_glands"
+origin_path = "/home/bcatez/data/nnUNet_raw/Dataset003_glands"
+folder_path = "/home/bcatez/data/nnUNet_raw/Dataset004_glands"
 
 for patient in patients.keys():
     print(patient,"\n")

@@ -10,7 +10,7 @@ f = open('/home/bcatez/data/patient.json')
 patients = json.load(f)
 f.close()
 
-folder_path = "/home/bcatez/data/nnUnet_raw/Dataset002_glands"
+folder_path = "/home/bcatez/data/nnUNet_raw/Dataset002_glands"
 skull_path = "/home/bcatez/data/Skull_folder"
 
 for patient in patients.keys():
