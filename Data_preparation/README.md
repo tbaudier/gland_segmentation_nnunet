@@ -76,16 +76,6 @@ The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/
   |  |  |  ├── p002_psma_0000.nii.gz
   |  |  |  └── ...
   |  |  └── Dataset.json
-  |  ├── Dataset003_1_glands
-  |  |  ├── imagesTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  ├── labelsTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  └── Dataset.json
   |  └── Dataset004_glands
   |     ├── imagesTr
   |     |  ├── p001_psma_0000.nii.gz
