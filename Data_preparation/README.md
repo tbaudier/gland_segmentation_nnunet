@@ -1,4 +1,6 @@
-# Data preparation.
+# Data
+
+## Preperation
 
 The Original data comes from Dicom full body ct scans.
 
@@ -38,3 +40,73 @@ Even after the crop, 3 Dimentional data is still quite a heavy format.
 We may reduce image size to help with model testing. 
 
 The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/Data_preparation/small_Dataset.py) reduces the size by 3 (which is the lowest we recommend before the data dteriorates severly).
+
+## Architecture
+
+```
+  data/
+  ├──nnUNet_raw
+  |  ├── Dataset001_glands
+  |  |  ├── imagesTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  ├── labelsTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  └── Dataset.json
+  |  ├── Dataset002_glands
+  |  |  ├── imagesTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  ├── labelsTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  └── Dataset.json
+  |  ├── Dataset003_glands
+  |  |  ├── imagesTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  ├── labelsTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  └── Dataset.json
+  |  ├── Dataset003_1_glands
+  |  |  ├── imagesTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  ├── labelsTr
+  |  |  |  ├── p001_psma_0000.nii.gz
+  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  └── ...
+  |  |  └── Dataset.json
+  |  └── Dataset004_glands
+  |     ├── imagesTr
+  |     |  ├── p001_psma_0000.nii.gz
+  |     |  ├── p002_psma_0000.nii.gz
+  |     |  └── ...
+  |     ├── labelsTr
+  |     |  ├── p001_psma_0000.nii.gz
+  |     |  ├── p002_psma_0000.nii.gz
+  |     |  └── ...
+  |     └── Dataset.json
+  └── Skull_folder
+     ├── skull_resized
+     |  ├── p001_psma_0000.nii.gz
+     |  ├── p002_psma_0000.nii.gz
+     |  └── ...
+     ├── skull_fullsized
+     |  ├── p001_psma_0000.nii.gz
+     |  ├── p002_psma_0000.nii.gz
+     |  └── ...
+     └── skull_cropped
+        ├── p001_psma_0000.nii.gz
+        ├── p002_psma_0000.nii.gz
+        └── ...
+``` 
