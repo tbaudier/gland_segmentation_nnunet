@@ -14,7 +14,7 @@ for patient in patients.keys():
     print(patient,"\n")
     # open the ct
     image = itk.imread(origin_path + "/imagesTr/" + patients[patient] + "_0000.nii.gz")
-    label = itk.imread(origin_path + "/labelsTr/" + patients[patient] + "_0000.nii.gz")
+    label = itk.imread(origin_path + "/labelsTr/" + patients[patient] + ".nii.gz")
     spacing = image.GetSpacing()
     size = image.GetLargestPossibleRegion().GetSize()
 
@@ -46,7 +46,7 @@ for patient in patients.keys():
     label.SetOrigin(centerorigin)
     # resize and save
     label_output = gt.applyTransformation(input=label,newspacing=newspacing,neworigin=centerorigin, newsize=newsize,pad=0 ,interpolation_mode="NN",force_resample=True)
-    itk.imwrite(label_output, folder_path + "/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(label_output, folder_path + "/labelsTr/" + patients[patient] + ".nii.gz", compression=True)
     print("Saved\n______________________________________")
 
 generate_dataset_json.generate_dataset_json(output_folder=folder_path,
@@ -59,5 +59,6 @@ generate_dataset_json.generate_dataset_json(output_folder=folder_path,
                                                     "Glnd_Submand_R":5,
                                                     "Parotid_L":6},
                                             num_training_cases=50,
-                                            file_ending=".nii.gz")
+                                            file_ending=".nii.gz",
+                                            dataset_name="Dataset004_glands")
 print("Dataset.json generated succesfully.")

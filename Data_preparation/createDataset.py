@@ -62,7 +62,7 @@ for patient in patients.keys():
     structImage = itk.image_from_array(array)
     structImage.SetSpacing(newspacing)
     structImage.SetOrigin(neworigin)
-    itk.imwrite(structImage, folder_path + "/labelsTr/" + patients[patient] + "_0000.nii.gz", compression=True)
+    itk.imwrite(structImage, folder_path + "/labelsTr/" + patients[patient] + ".nii.gz", compression=True)
     print("Saved\n")
 
     print("CT...")  
@@ -93,5 +93,6 @@ generate_dataset_json.generate_dataset_json(output_folder=folder_path,
                                                     "Glnd_Submand_R":5,
                                                     "Parotid_L":6},
                                             num_training_cases=50,
-                                            file_ending=".nii.gz")
+                                            file_ending=".nii.gz",
+                                            dataset_name="Dataset002_glands")
 print("Dataset.json generated succesfully.")
