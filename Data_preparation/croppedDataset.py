@@ -87,7 +87,7 @@ generate_dataset_json.generate_dataset_json(output_folder=folder_path,
                                                     "Parotid_R":4,
                                                     "Glnd_Submand_R":5,
                                                     "Parotid_L":6},
-                                            num_training_cases=50,
+                                            num_training_cases=45,
                                             file_ending=".nii.gz",
                                             dataset_name="Dataset003_glands")
 print("Dataset.json generated succesfully.")
