@@ -52,40 +52,57 @@ The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/
   |  |  |  ├── p002_psma_0000.nii.gz
   |  |  |  └── ...
   |  |  ├── labelsTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
+  |  |  |  ├── p001_psma.nii.gz
+  |  |  |  ├── p002_psma.nii.gz
   |  |  |  └── ...
   |  |  └── Dataset.json
-  |  ├── Dataset002_glands
-  |  |  ├── imagesTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  ├── labelsTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  └── Dataset.json
-  |  ├── Dataset003_glands
-  |  |  ├── imagesTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  ├── labelsTr
-  |  |  |  ├── p001_psma_0000.nii.gz
-  |  |  |  ├── p002_psma_0000.nii.gz
-  |  |  |  └── ...
-  |  |  └── Dataset.json
+  |  ├── ..
   |  └── Dataset004_glands
   |     ├── imagesTr
   |     |  ├── p001_psma_0000.nii.gz
   |     |  ├── p002_psma_0000.nii.gz
   |     |  └── ...
   |     ├── labelsTr
-  |     |  ├── p001_psma_0000.nii.gz
-  |     |  ├── p002_psma_0000.nii.gz
+  |     |  ├── p001_psma.nii.gz
+  |     |  ├── p002_psma.nii.gz
   |     |  └── ...
   |     └── Dataset.json
+  ├── nnUNet_preprocessed
+  |  ├── Dataset004_glands
+  |  |  ├── dataset.json
+  |  |  ├── dataset_fingerprint.json
+  |  |  ├── nnUNetPlans.json
+  |  |  ├── splits_final.json
+  |  |  ├── gt_segmentations
+  |  |  |  ├── p001_psma.nii.gz
+  |  |  |  ├── p002_psma.nii.gz
+  |  |  |  └── ..
+  |  |  ├── nnUNetPlans_2d
+  |  |  |  ├── p001_psma.npy
+  |  |  |  ├── p001_psma.npz
+  |  |  |  ├── p001_psma.pkl
+  |  |  |  ├── p001_psma_seg.npy
+  |  |  |  └── ..
+  |  |  └── nnUNetPlans_3d_fullres
+  |  |     ├── p001_psma.npz
+  |  |     ├── p001_psma.pkl
+  |  |     └── ..
+  |  └── ..
+  ├──nnUNet_results
+  |  ├── Dataset004_glands
+  |  |  ├── nnUNetTrainer_nnUNetPlans_2d
+  |  |  |  ├── dataset.json
+  |  |  |  ├── dataset_fingerprint.json
+  |  |  |  ├── plans.json
+  |  |  |  ├── fold_0
+  |  |  |  |  ├── checkpoint_best.pth
+  |  |  |  |  ├── debug.json
+  |  |  |  |  ├── progress.png
+  |  |  |  |  ├── training_log_[date+hour+sec].txt
+  |  |  |  |  └── ..
+  |  |  |  └── ..
+  |  |  └── ..
+  |  └── ..
   └── Skull_folder
      ├── skull_resized
      |  ├── p001_psma_0000.nii.gz
