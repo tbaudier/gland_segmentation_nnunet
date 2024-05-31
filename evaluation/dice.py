@@ -1,19 +1,28 @@
 import itk
 import numpy as np
 
-def dice(ar1, ar2):
+def dice(inf, label):
 
-    ar1 = itk.GetArrayFromImage(itk.imread(ar1))
-    ar2 = itk.GetArrayFromImage(itk.imread(ar2))
+    result = []
+    
+    inf = itk.GetArrayFromImage(itk.imread(inf))
+    label = itk.GetArrayFromImage(itk.imread(label))
 
-    im1 = np.asarray(ar1).astype(np.bool_)
-    im2 = np.asarray(ar2).astype(np.bool_)
 
-    if im1.shape != im2.shape:
-        raise ValueError("Shape mismatch: im1 and im2 must have the same shape.")
+    for val in range(1,7):
+        inf_ = inf.copy()
+        label_ = label.copy()
+        inf_[inf_ != val] = 0
+        label_[label_ != val] = 0
+        inf_bool = np.asarray(inf_).astype(np.bool_)
+        label_bool = np.asarray(label_).astype(np.bool_)
+
+        if inf_bool.shape != label_bool.shape:
+            raise ValueError("Shape mismatch: inference and label must have the same shape.")
     
     # Compute Dice coefficient
-    intersection = np.logical_and(im1,im2)
+        intersection = np.logical_and(inf_bool,label_bool)
 
-    return 2.*intersection.sum()/(im1.sum() + im2.sum())
+        result.append(2.*intersection.sum()/(inf_bool.sum() + label_bool.sum()))
 
+    return result
