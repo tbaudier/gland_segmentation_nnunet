@@ -1,5 +1,6 @@
 import itk
 import numpy as np
+import json
 
 def dice(inf, label):
 
@@ -35,6 +36,9 @@ def dice_result(imagesTs :list):
         dice_results[i] = dice(inf="/home/bcatez/data/nnUNet_raw/Dataset004_glands/imagesTs_pred_/p0" + str(imagesTs[i]) + "_psma.nii.gz",
                             label="/home/bcatez/data/nnUNet_raw/Dataset004_glands/labelsTr/p0" + str(imagesTs[i]) + "_psma.nii.gz")
 
-    np.save("/home/bcatez/data/nnUNet_raw/Dataset004_glands/imagesTs_pred_/dice_results.npy",dice_results)
+    file = dice_results.tolist()
+    with open('/home/bcatez/data/nnUNet_raw/Dataset004_glands/imagesTs_pred_/dice_results.json','w', encoding='utf-8') as f:
+        json.dump(file, f, ensure_ascii=False, separators=(',\n', ','))
+    # np.save("/home/bcatez/data/nnUNet_raw/Dataset004_glands/imagesTs_pred_/dice_results.npy",dice_results)
 
 dice_result([12,16,21,22,47])
