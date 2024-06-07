@@ -5,7 +5,7 @@ from nnunetv2.inference.predict_from_raw_data import nnUNetPredictor
 from multiprocessing import freeze_support, Process
 import sys
 
-def inference(dataset_name : str, Unet_configuration : str = "3d_fullres", epoch : str = None):    
+def inference(dataset_name : str, Unet_configuration : str = "3d_fullres", epoch : str = None, fold : int = 4):    
     # instantiate the nnUNetPredictor
     predictor = nnUNetPredictor(
         tile_step_size=0.5,
@@ -20,7 +20,7 @@ def inference(dataset_name : str, Unet_configuration : str = "3d_fullres", epoch
     # initializes the network architecture, loads the checkpoint
     predictor.initialize_from_trained_model_folder(
         join(nnUNet_results, dataset_name + '/nnUNetTrainer'+ epoch + '__nnUNetPlans__' + Unet_configuration),
-        use_folds=(0,),
+        use_folds=(fold,),
         checkpoint_name='checkpoint_final.pth',
     )
     # variant 1: give input and output folders
@@ -33,4 +33,4 @@ def inference(dataset_name : str, Unet_configuration : str = "3d_fullres", epoch
 
 if __name__ == '__main__':
     freeze_support()
-    Process(target=inference(sys.argv[1],sys.argv[2], sys.argv[3])).start()
+    Process(target=inference(sys.argv[1],sys.argv[2], sys.argv[3], sys.argv[4])).start()
