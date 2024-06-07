@@ -29,15 +29,15 @@ def dice(inf, label):
     return result
 
 
-def dice_result(imagesTs :list[int], dataset_id : str):
+def dice_result(imagesTs :list[int], dataset_name : str):
     dice_results = np.zeros((len(imagesTs),6))
 
     for i in range(len(imagesTs)):
-        dice_results[i] = dice(inf="/home/bcatez/data/nnUNet_raw/Dataset" + dataset_id + "_glands/imagesTs_pred_/p0" + str(imagesTs[i]) + "_psma.nii.gz",
-                            label="/home/bcatez/data/nnUNet_raw/Dataset" + dataset_id + "_glands/labelsTr/p0" + str(imagesTs[i]) + "_psma.nii.gz")
+        dice_results[i] = dice(inf="/home/bcatez/data/nnUNet_raw/" + dataset_name + "/imagesTs_pred_/p0" + str(imagesTs[i]) + "_psma.nii.gz",
+                            label="/home/bcatez/data/nnUNet_raw/" + dataset_name + "/labelsTr/p0" + str(imagesTs[i]) + "_psma.nii.gz")
 
     file = dice_results.tolist()
-    with open('/home/bcatez/data/nnUNet_raw/Dataset' + dataset_id + '_glands/imagesTs_pred_/dice_results.json','w', encoding='utf-8') as f:
+    with open('/home/bcatez/data/nnUNet_raw/' + dataset_name + '/imagesTs_pred_/dice_results.json','w', encoding='utf-8') as f:
         json.dump(file, f, ensure_ascii=False, separators=(',\n', ','))
 
 # change list according to patients ID in imagesTs
