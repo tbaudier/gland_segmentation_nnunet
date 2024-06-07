@@ -44,4 +44,4 @@ def dice_result(imagesTs :list[int], dataset_name : str):
 
 if __name__ == "__main__": 
     import sys
-    dice_result(sys.argv[2:-1], sys.argv[1])
+    dice_result(sys.argv[2:7], sys.argv[1])
