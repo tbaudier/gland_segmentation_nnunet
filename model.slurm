@@ -47,7 +47,7 @@ export nnUNet_results='/gpfsscratch/rech/vax/commun/nnUNet_results'
 # nnUNetv2_plan_and_preprocess -d ${DATASET_NAME:7:3} -c $UNET_CONFIGURATION --verify_dataset_integrity
 
 # train the model
-# nnUNetv2_train ${DATASET_NAME:7:3} $UNET_CONFIGURATION $FOLD $OPTION $EPOCHS # example epoch = "_100epochs"
+# nnUNetv2_train ${DATASET_NAME:7:3} $UNET_CONFIGURATION $FOLD $OPTION$EPOCHS # example epoch = "_100epochs"
 
 # evaluate the model
 mkdir -p nnUNet_raw/$DATASET_NAME/imagesTs_pred_
