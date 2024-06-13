@@ -2,18 +2,17 @@
 
 ## Data
 
-This project uses dicom images from CT. Every patient data has been anonimized and transformed to .nii.gz file before processing.
+This project uses 50 dicom images from 50 patient CT scans. Multiple datasets has been created in order to manipulate the data and train it.
 
 [comment]: <> (insert dataviz result here, like boxplot of density)
 
 ## Objective
 
-Create a DeepLearning model in order to segment salivary and lacrimal glands.
+Use nnUNet to segment salivary glands and lacrimal glands automatically.
 
 ## Technology
 
 - Python
-- PyTorch
-- nnUnet
-  
-[comment]: <> (insert the rest of the list here + mention the use of jean zay)
+- [nnUNet](https://github.com/MIC-DKFZ/nnUNet)
+- IDRIS's supercaculator : [Jeay-zay](http://www.idris.fr/jean-zay/)
+
