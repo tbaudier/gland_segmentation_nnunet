@@ -55,6 +55,10 @@ The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/
   |  |  |  ├── p001_psma.nii.gz
   |  |  |  ├── p002_psma.nii.gz
   |  |  |  └── ...
+  |  |  ├── imagesTs
+  |  |  |  ├── p0012_psma_0000.nii.gz
+  |  |  |  ├── p0016_psma_0000.nii.gz
+  |  |  |  └── ...
   |  |  └── Dataset.json
   |  ├── ..
   |  └── Dataset004_glands
@@ -65,6 +69,10 @@ The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/
   |     ├── labelsTr
   |     |  ├── p001_psma.nii.gz
   |     |  ├── p002_psma.nii.gz
+  |     |  └── ...
+  |     ├── imagesTs
+  |     |  ├── p0012_psma_0000.nii.gz
+  |     |  ├── p0016_psma_0000.nii.gz
   |     |  └── ...
   |     └── Dataset.json
   ├── nnUNet_preprocessed
@@ -90,7 +98,7 @@ The code [here](https://github.com/tbaudier/gland_segmentation_nnunet/blob/main/
   |  └── ..
   ├──nnUNet_results
   |  ├── Dataset004_glands
-  |  |  ├── nnUNetTrainer_nnUNetPlans_2d
+  |  |  ├── nnUNetTrainer_nnUNetPlans_3d_fullres
   |  |  |  ├── dataset.json
   |  |  |  ├── dataset_fingerprint.json
   |  |  |  ├── plans.json
